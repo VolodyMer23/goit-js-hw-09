@@ -42,7 +42,7 @@ function onFormElSubmit(e) {
     pos += 1;
     del += Number(stepDelay);
 
-    setInterval(() => {
+    const intervalId = setInterval(() => {
       createPromise(pos, del)
         .then(({ position, delay }) => {
           Notiflix.Notify.success(
