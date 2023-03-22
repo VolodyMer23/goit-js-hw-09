@@ -43,13 +43,15 @@ flatpickr('#datetime-picker', options);
 function onStartBtn() {
   timerIntervalId = setInterval(() => {
     currentTime = Date.now();
-    if (selectedTime.getTime() > 0) {
+    if (selectedTime.getTime() - currentTime > 0) {
       const timerCount = selectedTime.getTime() - currentTime;
       const { days, hours, minutes, seconds } = convertMs(timerCount);
       daysCounterEl.textContent = days;
       hoursCounterEl.textContent = hours;
       minutesCounterEl.textContent = minutes;
       secondsCounterEl.textContent = seconds;
+    } else if (selectedTime.getTime() - currentTime <= 0) {
+      clearInterval(timerIntervalId);
     }
     return;
   }, 1000);
